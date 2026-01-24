@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naija VanguardNetwork Report | Breaking News & Analysis</title>
+<meta name="description" content="Breaking Nigerian news, in-depth politics, business insights and cybersecurity reports.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --brand:#c41e3a;
+  --brand-dark:#8b1528;
+  --accent:#0b3c5d;
+  --accent-light:#1a5980;
+  --success:#27ae60;
+  --warning:#f39c12;
+  --danger:#e74c3c;
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --surface-elevated:#ffffff;
+  --text:#1a202c;
+  --text-light:#4a5568;
+  --muted:#718096;
+  --border:#e2e8f0;
+  --border-dark:#cbd5e0;
+  --radius:16px;
+  --radius-sm:8px;
+  --radius-lg:20px;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.04);
+  --shadow-md:0 4px 20px rgba(0,0,0,.08);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.12);
+  --shadow-xl:0 20px 60px rgba(0,0,0,.15);
+  --transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  transition:background .4s,color .4s;
+}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none;transition:var(--transition)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--brand);outline-offset:4px;border-radius:4px}
+
+.reading-progress{
+  position:fixed;top:0;left:0;width:0%;height:4px;
+  background:linear-gradient(90deg,var(--brand),var(--accent));
+  z-index:9999;transition:width .1s;box-shadow:0 2px 8px rgba(196,30,58,.4);
+}
+
+.top-bar{
+  background:linear-gradient(135deg,#000,#1a1a1a);
+  color:#fff;padding:10px 24px;font-size:13px;
+  display:flex;justify-content:space-between;align-items:center;
+  letter-spacing:.03em;font-weight:500;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.top-bar-left{display:flex;gap:16px;align-items:center}
+.top-bar-right{display:flex;gap:20px;align-items:center}
+.top-bar a{opacity:.85;transition:opacity .2s}
+.top-bar a:hover{opacity:1;color:var(--brand)}
+
+.live-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#ff0000;color:#fff;padding:4px 10px;
+  border-radius:4px;font-size:11px;font-weight:700;
+}
+.live-badge::before{
+  content:"";width:6px;height:6px;background:#fff;
+  border-radius:50%;animation:blink 1s ease infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.ticker{
+  background:linear-gradient(90deg,var(--brand-dark),var(--brand),var(--brand-dark));
+  color:#fff;padding:12px 20px;font-weight:700;
+  overflow:hidden;white-space:nowrap;position:relative;
+  box-shadow:0 4px 12px rgba(196,30,58,.25);
+}
+.ticker::before{content:"";margin-right:8px;animation:pulse 1.5s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.95)}}
+.ticker span{display:inline-block;padding-left:100%;animation:slide 20s linear infinite}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+.header{
+  background:var(--surface);padding:36px 24px 24px;text-align:center;
+  border-bottom:4px solid var(--brand);box-shadow:var(--shadow-sm);position:relative;
+}
+.header::after{
+  content:"";position:absolute;bottom:-4px;left:50%;
+  transform:translateX(-50%);width:120px;height:4px;background:var(--accent);
+}
+.header img{height:80px;margin:0 auto 8px}
+.tagline{color:var(--muted);font-size:14px;font-weight:500;letter-spacing:.05em;margin-top:8px}
+
+.nav{
+  background:var(--surface);padding:0 24px;display:flex;gap:32px;justify-content:center;
+  position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px) saturate(1.8);box-shadow:var(--shadow-sm);
+}
+.nav a{
+  font-weight:600;font-size:14px;padding:18px 0;opacity:.8;
+  position:relative;letter-spacing:.02em;text-transform:uppercase;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:3px;
+  background:var(--brand);transition:width .3s;
+}
+.nav a:hover{opacity:1;color:var(--brand)}
+.nav a:hover::after{width:100%}
+
+.scroll-top{
+  position:fixed;bottom:90px;right:24px;background:var(--brand);color:#fff;
+  width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;opacity:0;visibility:hidden;transition:var(--transition);
+  box-shadow:var(--shadow-lg);z-index:999;font-size:20px;
+}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:hover{transform:translateY(-5px);background:var(--brand-dark)}
+
+.container{
+  max-width:1280px;margin:0 auto;display:grid;
+  grid-template-columns:minmax(0,3fr) minmax(300px,1fr);gap:40px;padding:40px 24px;
+}
+
+.breadcrumb{font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:500}
+.breadcrumb a{color:var(--brand)}
+.breadcrumb a:hover{text-decoration:underline}
+
+article{
+  background:var(--surface);padding:48px;border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);border:1px solid var(--border);animation:fadeInUp .6s;
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+.breaking{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;padding:8px 14px;font-size:11px;font-weight:800;
+  border-radius:var(--radius-sm);letter-spacing:.08em;text-transform:uppercase;
+  box-shadow:0 4px 12px rgba(196,30,58,.3);animation:breakingPulse 2s ease infinite;
+}
+@keyframes breakingPulse{0%,100%{box-shadow:0 4px 12px rgba(196,30,58,.3)}50%{box-shadow:0 4px 20px rgba(196,30,58,.5)}}
+.breaking::before{content:"⚡"}
+
+h1{
+  font-family:'Playfair Display',Georgia,serif;font-size:42px;line-height:1.2;
+  margin:20px 0 16px;font-weight:800;letter-spacing:-.02em;color:var(--text);
+}
+
+.meta{
+  display:flex;gap:20px;align-items:center;color:var(--muted);
+  font-size:14px;font-weight:500;padding:16px 0;border-bottom:1px solid var(--border);
+  margin-bottom:24px;flex-wrap:wrap;
+}
+.meta-item{display:flex;align-items:center;gap:6px}
+
+.hero{
+  margin:32px 0;border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-lg);position:relative;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4));pointer-events:none;
+}
+.hero img{height:480px;width:100%;object-fit:cover;transition:transform .6s}
+article:hover .hero img{transform:scale(1.02)}
+
+.article-content{font-size:17px;line-height:1.8;color:var(--text-light)}
+.article-content p{margin-bottom:24px}
+.article-content p:first-of-type::first-letter{
+  font-size:68px;font-weight:800;float:left;line-height:1;margin:8px 12px 0 0;
+  color:var(--brand);font-family:'Playfair Display',serif;
+}
+.article-content strong{color:var(--text);font-weight:700}
+
+.alert-box{
+  background:linear-gradient(135deg,#fff3cd,#fff8e1);border-left:5px solid var(--warning);
+  padding:20px 24px;margin:32px 0;border-radius:var(--radius);display:flex;
+  gap:16px;align-items:start;box-shadow:var(--shadow-sm);animation:slideIn .5s;
+}
+@keyframes slideIn{from{transform:translateX(-20px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+.alert-icon{font-size:24px;flex-shrink:0}
+.alert-content strong{display:block;margin-bottom:6px;font-size:16px}
+
+.quote-block{
+  background:var(--bg);border-left:5px solid var(--accent);padding:32px 40px;
+  margin:40px 0;border-radius:var(--radius);font-style:italic;position:relative;
+}
+.quote-block::before{
+  content:""";font-size:80px;position:absolute;top:-10px;left:20px;
+  color:var(--accent);opacity:.2;font-family:Georgia,serif;
+}
+.quote-block p{margin:0 0 12px;font-size:19px;color:var(--text);line-height:1.6}
+.quote-author{font-style:normal;font-weight:600;color:var(--muted);font-size:15px}
+.quote-author::before{content:"— "}
+
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:40px 0}
+.stat-card{
+  background:var(--bg);padding:32px;border-radius:var(--radius);text-align:center;
+  border:2px solid var(--border);transition:var(--transition);position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  transition:left .5s;
+}
+.stat-card:hover::before{left:100%}
+.stat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--brand)}
+.stat-number{
+  font-size:36px;font-weight:800;color:var(--brand);display:block;
+  margin-bottom:8px;font-family:'Playfair Display',serif;
+}
+.stat-label{
+  font-size:13px;color:var(--muted);font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+
+.key-points{
+  background:linear-gradient(135deg,#e3f2fd,#f0f7ff);padding:36px;
+  border-radius:var(--radius-lg);margin:40px 0;border:2px solid #2196f3;
+}
+.key-points h3{font-size:24px;margin-bottom:24px;color:var(--text);display:flex;align-items:center;gap:10px}
+.key-points ul{list-style:none;padding:0}
+.key-points li{padding:14px 0 14px 36px;position:relative;font-size:16px;line-height:1.7;color:var(--text-light)}
+.key-points li::before{content:"✓";position:absolute;left:0;color:#2196f3;font-weight:800;font-size:20px}
+
+.timeline{margin:40px 0;padding:36px;background:var(--bg);border-radius:var(--radius-lg);border:1px solid var(--border)}
+.timeline h3{font-size:24px;margin-bottom:32px;color:var(--text);font-weight:800}
+.timeline-item{padding:24px 0 24px 40px;border-left:3px solid var(--brand);position:relative;margin-bottom:24px}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-item::before{
+  content:"";position:absolute;left:-9px;top:28px;width:16px;height:16px;
+  background:var(--brand);border-radius:50%;box-shadow:0 0 0 4px var(--bg);
+}
+.timeline-time{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.timeline-content{font-size:15px;color:var(--text-light);line-height:1.7}
+
+.share-bar{
+  display:flex;gap:12px;margin:32px 0;padding:24px 0;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);flex-wrap:wrap;
+}
+.share-btn{
+  display:flex;align-items:center;gap:8px;padding:10px 18px;
+  border-radius:var(--radius-sm);font-size:14px;font-weight:600;cursor:pointer;
+  transition:var(--transition);border:1px solid var(--border);background:var(--surface);
+}
+.share-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--brand);background:var(--brand);color:#fff}
+
+.cta{
+  background:linear-gradient(135deg,#1a5980,#0b3c5d);color:#fff;padding:48px;
+  border-radius:var(--radius-lg);margin:48px 0;box-shadow:var(--shadow-xl);position:relative;overflow:hidden;
+}
+.cta::before{
+  content:"";position:absolute;top:-50%;right:-50%;width:200%;height:200%;
+  background:radial-gradient(circle,rgba(255,255,255,.1),transparent 70%);animation:rotate 20s linear infinite;
+}
+@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.cta-content{position:relative;z-index:1}
+.cta h3{font-size:30px;margin:0 0 16px;font-weight:800}
+.cta p{font-size:16px;line-height:1.7;margin-bottom:12px;opacity:.95}
+.feature-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0}
+.feature-item{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500}
+.feature-item::before{content:"✓";color:var(--success);font-weight:800;font-size:18px}
+.cta button{
+  background:var(--success);border:none;padding:18px 36px;font-weight:800;
+  font-size:15px;border-radius:var(--radius);cursor:pointer;transition:var(--transition);
+  box-shadow:0 8px 20px rgba(39,174,96,.3);text-transform:uppercase;letter-spacing:.05em;color:#fff;margin-top:12px;
+}
+.cta button:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(39,174,96,.4);background:#2ecc71}
+.trust-badges{display:flex;gap:24px;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);flex-wrap:wrap}
+.trust-badge{display:flex;align-items:center;gap:8px;font-size:13px;opacity:.9;font-weight:500}
+
+.app-box{
+  background:linear-gradient(135deg,var(--bg),#e8f0f7);padding:36px;
+  border-radius:var(--radius-lg);margin:40px 0;border:1px solid var(--border);
+}
+.app-header{display:flex;gap:24px;align-items:center;margin-bottom:28px}
+.app-header img{width:80px;height:80px;border-radius:18px;box-shadow:var(--shadow-md)}
+.app-info strong{font-size:20px;font-weight:700;display:block;margin-bottom:8px}
+.app-rating{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted);font-weight:500}
+.app-box>img{border-radius:var(--radius);box-shadow:var(--shadow-md);margin-top:24px}
+
+.related-articles{margin-top:60px;padding-top:40px;border-top:2px solid var(--border)}
+.related-articles h3{font-size:28px;margin-bottom:32px;font-weight:800}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.related-card{
+  background:var(--bg);border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);transition:var(--transition);cursor:pointer;
+}
+.related-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.related-card-img{width:100%;height:200px;background:linear-gradient(135deg,#667eea,#764ba2);position:relative}
+.related-tag{
+  position:absolute;top:12px;left:12px;background:rgba(0,0,0,.7);color:#fff;
+  padding:6px 12px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;
+}
+.related-card-content{padding:24px}
+.related-card h4{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.4;color:var(--text)}
+.related-card p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.related-meta{font-size:12px;color:var(--muted);font-weight:500}
+
+.author-card{
+  display:flex;align-items:center;gap:28px;background:var(--bg);padding:32px;
+  border-radius:var(--radius-lg);margin-top:60px;border:1px solid var(--border);transition:var(--transition);
+}
+.author-card:hover{box-shadow:var(--shadow-lg);transform:translateX(6px)}
+.author-card img{width:100px;height:100px;border-radius:50%;border:4px solid var(--brand);box-shadow:var(--shadow-md);flex-shrink:0}
+.author-info h4{font-size:20px;margin:0 0 10px;font-weight:800}
+.author-info p{margin:0 0 16px;font-size:15px;color:var(--muted);line-height:1.6}
+.author-social{display:flex;gap:10px}
+.social-link{
+  width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:14px;transition:var(--transition);
+}
+.social-link:hover{background:var(--brand);color:#fff;transform:translateY(-3px);box-shadow:var(--shadow-md)}
+
+.sidebar{animation:fadeInUp .6s ease .2s both}
+.sidebar-widget{
+  background:var(--surface);padding:28px;border-radius:var(--radius);margin-bottom:28px;
+  box-shadow:var(--shadow-md);border:1px solid var(--border);transition:var(--transition);
+}
+.sidebar-widget:hover{box-shadow:var(--shadow-lg)}
+.widget-title{
+  font-weight:800;font-size:19px;margin-bottom:24px;
+  border-left:5px solid var(--brand);padding-left:16px;color:var(--text);
+}
+.trending-item{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border);transition:var(--transition)}
+.trending-item:last-child{margin-bottom:0;padding-bottom:0;border:none}
+.trending-item:hover{transform:translateX(8px)}
+.trending-item a{font-size:15px;font-weight:600;line-height:1.5;color:var(--text);display:block}
+.trending-item a:hover{color:var(--brand)}
+.trending-meta{font-size:12px;color:var(--muted);margin-top:6px}
+
+.newsletter-widget{background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff}
+.newsletter-widget .widget-title{border-left-color:#fff;color:#fff}
+.newsletter-widget p{margin-bottom:16px;opacity:.95;font-size:15px}
+.newsletter-widget input{
+  width:100%;padding:14px;border-radius:var(--radius-sm);border:none;
+  margin-bottom:12px;font-size:14px;font-weight:500;
+}
+.newsletter-widget button{
+  width:100%;padding:14px;background:#000;color:#fff;border:none;font-weight:800;
+  font-size:14px;cursor:pointer;border-radius:var(--radius-sm);letter-spacing:.05em;transition:var(--transition);
+}
+.newsletter-widget button:hover{background:#1a1a1a;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+
+.tags-widget .tag{
+  display:inline-block;background:var(--bg);padding:8px 14px;border-radius:999px;
+  font-size:13px;font-weight:600;margin:0 6px 8px 0;border:1px solid var(--border);
+  transition:var(--transition);cursor:pointer;
+}
+.tags-widget .tag:hover{background:var(--brand);color:#fff;border-color:var(--brand);transform:translateY(-2px)}
+
+.comments{margin-top:60px;padding-top:40px;border-top:2px solid var(--border)}
+.comments h3{font-size:26px;margin-bottom:32px;font-weight:800}
+.comment{
+  padding:20px 0;border-bottom:1px solid var(--border);font-size:15px;
+  line-height:1.7;transition:var(--transition);
+}
+.comment:hover{padding-left:12px;background:var(--bg);margin:0 -12px;border-radius:var(--radius-sm)}
+.comment strong{color:var(--brand);font-weight:700}
+
+.footer{
+  background:linear-gradient(135deg,#000,#1a1a1a);color:#aaa;
+  padding:60px 24px 32px;margin-top:80px;border-top:4px solid var(--brand);
+}
+.footer-content{
+  max-width:1280px;margin:0 auto;display:grid;
+  grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:40px;
+}
+.footer-section h4{color:#fff;font-weight:700;margin-bottom:20px;font-size:16px}
+.footer-section a{display:block;margin-bottom:12px;font-size:14px;opacity:.8;transition:var(--transition)}
+.footer-section a:hover{opacity:1;color:var(--brand);transform:translateX(4px)}
+.footer-bottom{
+  text-align:center;padding-top:32px;border-top:1px solid rgba(255,255,255,.1);font-size:14px;
+}
+
+@media(max-width:1200px){
+  .container{grid-template-columns:1fr}
+  .footer-content{grid-template-columns:repeat(2,1fr)}
+  .related-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:768px){
+  h1{font-size:32px}
+  article{padding:32px 24px}
+  .nav{gap:16px;overflow-x:auto;justify-content:flex-start}
+  .stats-grid{grid-template-columns:1fr}
+  .hero img{height:300px}
+  .footer-content{grid-template-columns:1fr}
+  .author-card{flex-direction:column;text-align:center}
+  .feature-list{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+  h1{font-size:26px}
+  article{padding:24px 16px}
+  .cta{padding:28px 20px}
+  .scroll-top{bottom:82px;right:16px}
+}
+
+/* ===== Mobile Portrait Optimization ===== */
+@media (max-width: 600px) {
+
+  body {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .top-bar {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .ticker {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .header {
+    padding: 20px 16px 16px;
+  }
+
+  .header img {
+    height: 56px;
+  }
+
+  .tagline {
+    font-size: 12px;
+  }
+
+  .nav {
+    padding: 0 12px;
+  }
+
+  .nav a {
+    font-size: 12px;
+    padding: 14px 0;
+  }
+
+  .container {
+    padding: 20px 12px;
+    gap: 24px;
+  }
+
+  article {
+    padding: 20px 14px;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .meta {
+    font-size: 12px;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .hero img {
+    height: 220px;
+  }
+
+  .article-content {
+    font-size: 15px;
+  }
+
+  .article-content p {
+    margin-bottom: 16px;
+  }
+
+  .article-content p:first-of-type::first-letter {
+    font-size: 44px;
+    margin: 4px 8px 0 0;
+  }
+
+  .alert-box,
+  .quote-block,
+  .key-points,
+  .timeline,
+  .cta,
+  .app-box {
+    padding: 20px;
+    margin: 24px 0;
+  }
+
+  .stats-grid {
+    gap: 14px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
+  .stat-number {
+    font-size: 26px;
+  }
+
+  .share-bar {
+    padding: 16px 0;
+    gap: 8px;
+  }
+
+  .share-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .author-card {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .author-info p {
+    font-size: 14px;
+  }
+
+  .sidebar-widget {
+    padding: 20px;
+  }
+
+  .footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-section a {
+    font-size: 13px;
+  }
+  .social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  }
+  /* ===== Fix App Info Overflow (Mobile) ===== */
+.app-header {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.app-info {
+  min-width: 0; /* CRITICAL: prevents text overflow */
+}
+
+.app-info strong {
+  font-size: 18px;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.app-rating {
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 13px;
+}
+
+/* Extra safety for small Android phones */
+@media (max-width: 480px) {
+  .app-header {
+    flex-direction: row;
+    gap: 14px;
+  }
+
+  .app-header img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .app-info strong {
+    font-size: 16px;
+  }
+
+  .app-rating {
+    font-size: 12px;
+  }
+  .share-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<header class="top-bar">
+  <div class="top-bar-left">
+    <span>📅 Friday, January 24, 2026</span>
+  </div>
+  <div class="top-bar-right">
+    <a href="#">Subscribe</a>
+    <a href="#">Contact</a>
+    <a href="#">About</a>
+  </div>
+</header>
+
+<div class="ticker">
+  <span>BREAKING: Alleged BVN & NIN data exposure sparks nationwide cybersecurity debate • Authorities launch investigation • Public urged to enhance security protocols • Expert analysis inside</span>
+</div>
+
+<div class="header">
+  <img src="logo.png" alt="VanguardNetwork Report Logo">
+  <div class="tagline">Truth • Integrity • Excellence in Journalism</div>
+</div>
+
+<nav class="nav">
+  <a href="#">Home</a>
+  <a href="#">News</a>
+  <a href="#">Politics</a>
+  <a href="#">Business</a>
+  <a href="#">Technology</a>
+  <a href="#">Opinion</a>
+  <a href="#">Sports</a>
+</nav>
+
+<main class="container">
+
+<article>
+<div class="breadcrumb">
+  <a href="#">Home</a> / <a href="#">Technology</a> / <a href="#">Cybersecurity</a> / Breaking News
+</div>
+
+<span class="breaking">Breaking News</span>
+
+<h1>Alleged BVN, NIN Data Breach Sparks Nationwide Security Concerns</h1>
+
+<div class="meta">
+  <div class="meta-item"><span>✍️</span><span>Cybersecurity Desk</span></div>
+  <div class="meta-item"><span>📍</span><span>Lagos, Nigeria</span></div>
+  <div class="meta-item"><span>🕐</span><span>January 24, 2026 • 09:45 AM</span></div>
+  <div class="meta-item"><span>⏱️</span><span>5 min read</span></div>
+</div>
+
+<div class="hero">
+  <img src="hero-cybersecurity.jpg" alt="Cybersecurity illustration">
+</div>
+
+<div class="article-content">
+<p><strong>LAGOS</strong> — In what cybersecurity analysts are calling a pivotal moment for Nigerian digital infrastructure, reports have surfaced regarding a massive exposure of biometric and identification data. While authorities investigate, the public is being urged to adopt advanced security protocols immediately.</p>
+
+<div class="alert-box">
+  <div class="alert-icon">⚠️</div>
+  <div class="alert-content">
+    <strong>Security Alert:</strong> Experts report a 300% increase in phishing attempts targeting Nigerian citizens in the past 24 hours. Exercise extreme caution with unsolicited communications.
+  </div>
+</div>
+
+<p>The alleged leak includes sensitive fields associated with Bank Verification Numbers (BVN) and National Identification Numbers (NIN), two critical components of Nigeria's digital identity ecosystem. Industry experts have confirmed that while the full scope of the breach is still being verified by federal authorities, preliminary assessments suggest millions of records may have been compromised.</p>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <span class="stat-number">3x</span>
+    <span class="stat-label">Phishing Increase</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">20M+</span>
+    <span class="stat-label">Potential Records</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">24hrs</span>
+    <span class="stat-label">Detection Time</span>
+  </div>
+</div>
+
+<div class="quote-block">
+  <p>This represents a significant escalation in the threat landscape facing Nigerian digital infrastructure. The convergence of BVN and NIN data creates a perfect storm for identity theft, financial fraud, and sophisticated social engineering attacks.</p>
+  <div class="quote-author">Dr. Adebayo Okeke, Chief Information Security Officer, Lagos Tech Institute</div>
+</div>
+
+<p>Federal authorities, including the National Information Technology Development Agency (NITDA) and the Central Bank of Nigeria (CBN), have launched joint investigations into the matter. Meanwhile, cybersecurity firms across West Africa have reported unprecedented spikes in suspicious activity targeting Nigerian nationals.</p>
+
+<div class="key-points">
+  <h3>🔑 Key Security Implications</h3>
+  <ul>
+    <li>Exposed BVN and NIN data can be used for unauthorized loan applications and financial fraud</li>
+    <li>Criminals may use partial data sets to establish credibility in sophisticated phishing schemes</li>
+    <li>SIM card registration fraud and unauthorized access to government services are major concerns</li>
+    <li>The data serves as a foundational layer for digital identity verification across multiple platforms</li>
+  </ul>
+</div>
+
+<p>Technology consultant Chioma Nwosu warns: "Criminals are already leveraging this situation. We've documented cases where fraudsters are using partial data sets to establish credibility in phishing schemes, convincing victims they possess complete records unless immediate action is taken."</p>
+
+<div class="timeline">
+  <h3>📅 Timeline of Events</h3>
+  <div class="timeline-item">
+    <div class="timeline-time">January 23, 09:00 AM</div>
+    <div class="timeline-content">Initial reports of suspicious data exposure emerge on security forums</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">January 23, 02:30 PM</div>
+    <div class="timeline-content">Cybersecurity firms detect 200% spike in phishing attempts</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">January 23, 06:00 PM</div>
+    <div class="timeline-content">NITDA and CBN launch joint investigation</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">January 24, 09:00 AM</div>
+    <div class="timeline-content">Phishing attempts increase by additional 100%, reaching 300% total increase</div>
+  </div>
+</div>
+</div>
+
+<div class="share-bar">
+  <button class="share-btn">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37 8.59 8.59 0 01-2.72 1.04 4.28 4.28 0 00-7.3 3.9A12.14 12.14 0 013 4.79a4.28 4.28 0 001.33 5.72 4.23 4.23 0 01-1.94-.54v.06a4.29 4.29 0 003.43 4.2 4.3 4.3 0 01-1.93.07 4.29 4.29 0 004 2.98A8.6 8.6 0 012 19.54 12.13 12.13 0 008.29 21c7.55 0 11.68-6.26 11.68-11.68l-.01-.53A8.3 8.3 0 0022.46 6z"/>
+    </svg>
+    Twitter
+  </button>
+
+  <button class="share-btn">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M22 12a10 10 0 10-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.62-1.3 1.26V12h2.3l-.37 3h-1.93v7A10 10 0 0022 12z"/>
+    </svg>
+    Facebook
+  </button>
+
+  <button class="share-btn">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.45 20.45h-3.55v-5.4c0-1.29-.03-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85v5.5H9.47V9h3.41v1.56h.05c.48-.9 1.66-1.85 3.42-1.85 3.66 0 4.34 2.41 4.34 5.54v6.2zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/>
+    </svg>
+    LinkedIn
+  </button>
+
+  <button class="share-btn">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </svg>
+    Email
+  </button>
+
+  <button class="share-btn">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3.9 12a5 5 0 015-5h4v2h-4a3 3 0 100 6h4v2h-4a5 5 0 01-5-5zm6.1 1h4v-2h-4v2zm5-6h-4V5h4a5 5 0 110 10h-4v-2h4a3 3 0 100-6z"/>
+    </svg>
+    Copy Link
+  </button>
+</div>
+
+<div class="cta">
+  <div class="cta-content">
+    <h3>🛡️ Protect Your Digital Identity Now</h3>
+    <p>Get real-time alerts whenever your NIN or BVN is accessed or queried by third-party services. Our verified <strong>Account Security Service</strong> provides comprehensive protection for your sensitive data.</p>
+    
+    <div class="feature-list">
+      <div class="feature-item">Real-time monitoring</div>
+      <div class="feature-item">Instant breach alerts</div>
+      <div class="feature-item">Identity theft protection</div>
+      <div class="feature-item">Secure data vault</div>
+      <div class="feature-item">24/7 expert support</div>
+      <div class="feature-item">Dark web scanning</div>
+    </div>
+    
+    <a href="https://vanguardnetwork.github.io/Account-security-Services-app/Account%20Security%20Services.apk" download>
+      <button>⬇️ Download Free Security App</button>
+    </a>
+    
+    <div class="trust-badges">
+      <div class="trust-badge">🔒 256-bit Encryption</div>
+      <div class="trust-badge">✓ Verified Safe</div>
+      <div class="trust-badge">⭐ 4.6 Rating</div>
+      <div class="trust-badge">👥 20K+ Users</div>
+    </div>
+  </div>
+</div>
+
+<div class="app-box">
+  <div class="app-header">
+    <img src="app-icon.png" alt="Account Security Service">
+    <div class="app-info">
+      <strong>Account Security Service</strong>
+      <div class="app-rating">
+        <span>⭐⭐⭐⭐⭐ 4.6</span>
+        <span>•</span>
+        <span>20,000+ Downloads</span>
+        <span>•</span>
+        <span>Free</span>
+      </div>
+    </div>
+  </div>
+  <img src="app-screen-1.png" alt="App Screenshot">
+</div>
+
+<div class="related-articles">
+  <h3>📰 Related Coverage</h3>
+  <div class="related-grid">
+    <div class="related-card">
+<div class="related-card-img">
+  <img src="image-1.jpg" alt="Cybersecurity illustration">
+  <div class="related-tag">Technology</div>
+</div>
+      <div class="related-card-content">
+        <h4>How to Protect Yourself from Identity Theft</h4>
+        <p>Essential security measures every Nigerian should implement immediately</p>
+        <div class="related-meta">5 min read • Technology</div>
+      </div>
+    </div>
+    <div class="related-card">
+<div class="related-card-img">
+  <img src="image-2.jpg" alt="Cybersecurity illustration">
+  <div class="related-tag">Analysis</div>
+</div>
+      <div class="related-card-content">
+        <h4>Understanding BVN and NIN Security</h4>
+        <p>A comprehensive guide to Nigeria's digital identity infrastructure</p>
+        <div class="related-meta">7 min read • Business</div>
+      </div>
+    </div>
+    <div class="related-card">
+<div class="related-card-img">
+  <img src="image.jpg" alt="Cybersecurity illustration">
+  <div class="related-tag">Breaking</div>
+</div>
+      <div class="related-card-content">
+        <h4>CBN Issues New Security Guidelines</h4>
+        <p>Central Bank responds to data breach concerns with updated protocols</p>
+        <div class="related-meta">4 min read • Finance</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="author-card">
+  <img src="author.png" alt="Author photo">
+  <div class="author-info">
+    <h4>Johnson James Ademola</h4>
+    <p>Investigative journalist specializing in digital rights, data privacy, and emerging cyber threats in West Africa. Award-winning reporter with over 10 years of experience covering technology and security.</p>
+<div class="author-social">
+  <a href="#" class="social-link" aria-label="Twitter">
+    <svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37 8.59 8.59 0 01-2.72 1.04 4.28 4.28 0 00-7.3 3.9A12.14 12.14 0 013 4.79a4.28 4.28 0 001.33 5.72 4.23 4.23 0 01-1.94-.54v.06a4.29 4.29 0 003.43 4.2 4.3 4.3 0 01-1.93.07 4.29 4.29 0 004 2.98A8.6 8.6 0 012 19.54 12.13 12.13 0 008.29 21c7.55 0 11.68-6.26 11.68-11.68l-.01-.53A8.3 8.3 0 0022.46 6z"/></svg>
+  </a>
+
+  <a href="#" class="social-link" aria-label="Facebook">
+    <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.62-1.3 1.26V12h2.3l-.37 3h-1.93v7A10 10 0 0022 12z"/></svg>
+  </a>
+
+  <a href="#" class="social-link" aria-label="Email">
+    <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+  </a>
+
+  <a href="#" class="social-link" aria-label="Website">
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 6H15a15.7 15.7 0 00-1.5-3.9A8.03 8.03 0 0118.93 8zM12 4c.9 1.2 1.6 2.6 2 4H10c.4-1.4 1.1-2.8 2-4zM4.07 8A8.03 8.03 0 019.5 4.1 15.7 15.7 0 008 8H4.07zM4 12c0-.7.1-1.4.27-2H8c-.1.65-.17 1.32-.17 2s.07 1.35.17 2H4.27A7.9 7.9 0 014 12zm.07 4H8a15.7 15.7 0 001.5 3.9A8.03 8.03 0 014.07 16zM12 20c-.9-1.2-1.6-2.6-2-4h4c-.4 1.4-1.1 2.8-2 4zm2.5-3.9A15.7 15.7 0 0016 16h3.93a8.03 8.03 0 01-5.43 3.9zM16 14c.1-.65.17-1.32.17-2s-.07-1.35-.17-2h3.73c.17.6.27 1.3.27 2s-.1 1.4-.27 2H16z"/></svg>
+  </a>
+</div>
+  </div>
+</div>
+
+<section class="comments">
+  <h3>💬 Reader Comments (7)</h3>
+  <div class="comment"><strong>Chinedu (Enugu):</strong> Nigeria needs stronger cyber awareness campaigns. This is a wake-up call for better digital infrastructure security.</div>
+  <div class="comment"><strong>Aisha (Abuja):</strong> This is scary if true. People should really protect their BVN and NIN. I'm downloading that security app right now.</div>
+  <div class="comment"><strong>Blessing:</strong> I'm not surprised. Nigerians should start using security apps seriously. Our data is too vulnerable.</div>
+  <div class="comment"><strong>Queen Rita:</strong> The application did not install properly on my phone. Can someone help? What's the minimum Android version required?</div>
+  <div class="comment"><strong>Zainab:</strong> I have downloaded the app and set up monitoring. Feeling much safer now. Everyone should protect themselves!</div>
+  <div class="comment"><strong>Kelvin:</strong> I've seen fake links shared on WhatsApp already claiming to be from banks. Be very vigilant people!</div>
+  <div class="comment"><strong>Moderator:</strong> For those asking - the app is safe but not yet on Play Store. We're working on verification. Download from official link only.</div>
+</section>
+</article>
+
+<aside class="sidebar">
+  <div class="sidebar-widget">
+    <h3 class="widget-title">🔥 Trending Now</h3>
+    <div class="trending-item">
+      <a href="#">Central Bank issues new guidelines on digital assets and cryptocurrency regulation</a>
+      <div class="trending-meta">2 hours ago • Business</div>
+    </div>
+    <div class="trending-item">
+      <a href="#">Eko Atlantic expansion project reaches phase four milestone</a>
+      <div class="trending-meta">4 hours ago • Development</div>
+    </div>
+    <div class="trending-item">
+      <a href="#">Super Eagles coach announces final squad for World Cup qualifiers</a>
+      <div class="trending-meta">6 hours ago • Sports</div>
+    </div>
+  </div>
+
+  <div class="sidebar-widget newsletter-widget">
+    <h3 class="widget-title">📧 Daily Newsletter</h3>
+    <p>Get the morning briefing delivered to your inbox every day at 6 AM.</p>
+    <input type="email" placeholder="Enter your email address">
+    <button>SUBSCRIBE NOW</button>
+  </div>
+
+  <div class="sidebar-widget tags-widget">
+    <h3 class="widget-title">🏷️ Popular Tags</h3>
+    <span class="tag">#Cybersecurity</span>
+    <span class="tag">#BVN</span>
+    <span class="tag">#DataBreach</span>
+    <span class="tag">#Nigeria</span>
+    <span class="tag">#Technology</span>
+    <span class="tag">#Privacy</span>
+    <span class="tag">#Banking</span>
+    <span class="tag">#Security</span>
+  </div>
+
+</aside>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>About Us</h4>
+      <a href="#">Our Story</a>
+      <a href="#">Team</a>
+      <a href="#">Careers</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-section">
+      <h4>Sections</h4>
+      <a href="#">News</a>
+      <a href="#">Politics</a>
+      <a href="#">Business</a>
+      <a href="#">Technology</a>
+    </div>
+    <div class="footer-section">
+      <h4>Resources</h4>
+      <a href="#">Advertise</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">RSS Feed</a>
+    </div>
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <a href="#">Twitter</a>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Naija VanguardNetwork Report. All rights reserved. | Excellence in Nigerian Journalism</p>
+  </div>
+</footer>
+
+<div class="scroll-top" id="scrollTop">↑</div>
+
+<script>
+// Reading Progress Bar
+window.addEventListener('scroll',()=>{
+  const article=document.querySelector('article');
+  const winScroll=document.documentElement.scrollTop;
+  const height=article.offsetHeight-window.innerHeight;
+  const scrolled=(winScroll/height)*100;
+  document.getElementById('readingProgress').style.width=Math.min(scrolled,100)+'%';
+});
+
+// Scroll to Top
+const scrollBtn=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>300){
+    scrollBtn.classList.add('visible');
+  }else{
+    scrollBtn.classList.remove('visible');
+  }
+});
+scrollBtn.addEventListener('click',()=>{
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+
+</body>
+</html>
